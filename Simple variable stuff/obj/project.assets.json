@@ -8,24 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\c3030690\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\hibfu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\c3030690\\Source\\Repos\\Console-pet-simulator\\Simple variable stuff\\Simple variable stuff.csproj",
+      "projectUniqueName": "C:\\Users\\hibfu\\OneDrive\\Desktop\\Uni stuff\\Programs\\Simple variable stuff\\Simple variable stuff\\Simple variable stuff.csproj",
       "projectName": "Simple variable stuff",
-      "projectPath": "C:\\Users\\c3030690\\Source\\Repos\\Console-pet-simulator\\Simple variable stuff\\Simple variable stuff.csproj",
-      "packagesPath": "C:\\Users\\c3030690\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\c3030690\\Source\\Repos\\Console-pet-simulator\\Simple variable stuff\\obj\\",
+      "projectPath": "C:\\Users\\hibfu\\OneDrive\\Desktop\\Uni stuff\\Programs\\Simple variable stuff\\Simple variable stuff\\Simple variable stuff.csproj",
+      "packagesPath": "C:\\Users\\hibfu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hibfu\\OneDrive\\Desktop\\Uni stuff\\Programs\\Simple variable stuff\\Simple variable stuff\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\c3030690\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\hibfu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -33,7 +28,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -67,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

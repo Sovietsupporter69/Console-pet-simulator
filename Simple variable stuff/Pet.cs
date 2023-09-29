@@ -89,9 +89,10 @@
         Console.WriteLine("2. Happiness");
         Console.WriteLine("3. Intelegence");
         Console.WriteLine("4. Fitness");
-        Console.Write("Your choice: ");
+        
         while (true)
         { //Preventing going forward without an answer
+            Console.Write("Your choice: ");
             try
             {
                 this.Spec = int.Parse(Console.ReadLine()); //Getting the users input
