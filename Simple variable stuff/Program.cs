@@ -1,4 +1,5 @@
 ﻿using System.Runtime.ConstrainedExecution;
+using System.Xml.Serialization;
 
 Random rand = new Random();
 bool Play = true;
@@ -20,6 +21,8 @@ float InteMulti = 1; float InteRedMulti = 1;
 float FitnMulti = 1; float FitnRedMulti = 1;
 
 int NatureRand; float StatRand;
+int Specialisation; float ChaosPercent;
+bool Chaos = false; float ChaosChance = 0.7f;
 
 /*List<Char> printableChars = new List<char>();
 for (int i = char.MinValue; i <= char.MaxValue; i++) { //Extra bit of code for finding all possible characters
@@ -65,7 +68,7 @@ while (Play == true)
     }
     Console.WriteLine("");
     Console.WriteLine("Nature: " + CurrentNature);
-    Console.WriteLine("Age: " + (int)Pets[CurrentPet].Age);
+    Console.WriteLine("Age: " + (int)Pets[CurrentPet].Age + "  Gen: " + Pets[CurrentPet].Generation);
 
     Console.WriteLine("Chose what you want to do with " + Pets[CurrentPet].Name + " " + Pets[CurrentPet].LastName + ":"); //Simply displaying the potencal actions a user can take
     Console.WriteLine("1.Feed");
@@ -82,6 +85,16 @@ while (Play == true)
         catch {  }
     }
 
+    ClumsyRand = rand.Next(1, 11); CriticalRand = rand.Next(1, (CriticalRanMax+1)); //Rolling for any random multipliers 
+    if (ClumsyRand == 10) { CriticalMulti *= 2; } //This is the clumsy nature randomiser
+    if (CriticalRand == 10) { CriticalMulti *= 2; } //This is the random critical randomiser
+    ChaosPercent = rand.Next(1, 500)/1000;
+    if (ChaosChance >= (rand.Next(1, 1000)/1000) && Chaos == true) { TurnStatChange(Action, (1-ChaosPercent)); TurnStatChange(rand.Next(1, 4), ChaosPercent); }
+
+    if ((FailChance == false || ClumsyRand != 1) && Chaos == false) {
+        TurnStatChange(Action, 1);
+    }
+
     Pets[CurrentPet].Age += 0.1f; //Changing the pet's variables
     Pets[CurrentPet].Hunger += (10 * HungRedMulti);
     Pets[CurrentPet].Happiness += (10 * HapiRedMulti);
@@ -91,53 +104,18 @@ while (Play == true)
     if (Pets[CurrentPet].Fitness < 0) { Pets[CurrentPet].Fitness = 0; }
     CriticalMulti = 1;
 
-    if (Pets[CurrentPet].Hunger > (100 + HungExtCapacity)) {  //All potencial death equivlelent codes
+    if (Pets[CurrentPet].Hunger > (100 + HungExtCapacity))
+    {  //All potencial death equivlelent codes
         Console.Clear();
         Console.WriteLine(Pets[CurrentPet].Name + " " + Pets[CurrentPet].LastName + " died due to hunger. Good job!"); //Informing the player of their mistake
         DeletePet();
     }
-    if (Pets[CurrentPet].Happiness > 100) {
+    if (Pets[CurrentPet].Happiness > 100)
+    {
         Console.Clear();
         Console.WriteLine(Pets[CurrentPet].Name + " " + Pets[CurrentPet].LastName + " left because you neglected them."); //Informing the player of their mistake
         DeletePet();
     }
-
-    ClumsyRand = rand.Next(1, 10); CriticalRand = rand.Next(1, (CriticalRanMax)); //Rolling for any random multipliers 
-    if (ClumsyRand == 10) { CriticalMulti *= 2; } //This is the clumsy nature randomiser
-    if (CriticalRand == 10) { CriticalMulti *= 2; } //This is the random critical randomiser
-
-    if (FailChance == false || ClumsyRand != 1) {
-        switch (Action) { //Parsing their choice into something tangable (even if its just a line)
-            case 1:
-                Pets[CurrentPet].Hunger -= (30 * HungMulti * CriticalMulti);
-                if (Pets[CurrentPet].Hunger < 0) { Pets[CurrentPet].Hunger = 0; } //Hunger option
-                break;
-            case 2:
-                Pets[CurrentPet].Happiness -= (50 * HapiMulti * CriticalMulti);
-                if (Pets[CurrentPet].Happiness < 0) { Pets[CurrentPet].Happiness = 0; } //Play option
-                break;
-            case 3:
-                Pets[CurrentPet].Intelegence += (10 * InteMulti * CriticalMulti); //Read option
-                break;
-            case 4:
-                Pets[CurrentPet].Fitness += (30 * FitnMulti * CriticalMulti); //Exersize option
-                break;
-            case 5:
-                Console.Clear();
-                Console.WriteLine(Pets[CurrentPet].Name + " " + Pets[CurrentPet].LastName + " waves goodbye as you move onto another pet.");
-                PetSwitch();
-                break;
-            case 6:
-                Console.Clear();
-                Console.WriteLine(Pets[CurrentPet].Name + " " + Pets[CurrentPet].LastName + " waves goodbye as you move onto another pet.");
-                CreatePet();
-                break;
-            default:
-                Console.WriteLine("Please choose an apropriate number."); //Preventing errors from incorrect input
-                break;
-        }
-    }
-
     if (Pets[CurrentPet].Age >= 10) {
         Console.Clear();
         Console.WriteLine(Pets[CurrentPet].Name + " has did of old age and so his child will take over");
@@ -162,9 +140,10 @@ void CreateChild()
 {
     Console.Write("Give the decendent of " + Pets[CurrentPet].Name + " a name: ");
     Pets[CurrentPet].Name = Console.ReadLine();
-    NatureRand = rand.Next(1, 20);
-    if (NatureRand >= 3) { //A 3/20 chance for a child to have a different nature to the parent
+    NatureRand = rand.Next(1, 21);
+    if (NatureRand <= 3) { //A 3/20 chance for a child to have a different nature to the parent
         Pets[CurrentPet].Nature = Pets[CurrentPet].RandomiseNature();
+        NatureSwitch();
     }
 
     //Used desmos's graphing calculator for the next part to get a proper look at the stat variation chances
@@ -192,7 +171,7 @@ void PetSwitch()
     if (PetCount != 0) { //Skips switching if you have no pets left
         Console.WriteLine("Please chose a pet: ");
         for (int i = 0; i <= (PetCount - 1); i++) { //Repeats through the list of pets cause I don't know how many there will be when this is called
-            Console.WriteLine((i+1) + "." + Pets[i].Name);
+            Console.WriteLine((i+1) + "." + Pets[i].Name + " " + Pets[i].LastName);
         }
         Console.Write("Your choice: ");
         while (true) { //Preventing going forward without an answer
@@ -216,7 +195,7 @@ void NatureSwitch()
     FitnMulti = 1; FitnRedMulti = 1;
     HungExtCapacity = 0; FailChance = false;
     CriticalRanMax = 10; PlayBoyActive = false;
-    CurrentNature = "";
+    CurrentNature = ""; Chaos = false;
 
     switch (Pets[CurrentPet].Nature) { //Just applys the multipliers and changes needed for the current pet
         case 'L':
@@ -255,13 +234,36 @@ void NatureSwitch()
             PlayBoyActive = true;
             break;
         case 'S':
-            CurrentNature = "Specialised TBD";
-            //TBD cause it would be massive
+            switch (Pets[CurrentPet].Spec) //Applies the apropriate stats for the Specialisation
+            {
+                case 1:
+                    CurrentNature = "Specialised (Hung)";
+                    HungMulti = 1.4f; HapiMulti = 0.9f;
+                    InteMulti = 0.9f; FitnMulti = 0.9f;
+                    break;
+                case 2:
+                    CurrentNature = "Specialised (Hapi)";
+                    HungMulti = 0.9f; HapiMulti = 1.4f;
+                    InteMulti = 0.9f; FitnMulti = 0.9f;
+                    break;
+                case 3:
+                    CurrentNature = "Specialised (Intel)";
+                    HungMulti = 0.9f; HapiMulti = 0.9f;
+                    InteMulti = 1.4f; FitnMulti = 0.9f;
+                    break;
+                case 4:
+                    CurrentNature = "Specialised (Fitns)";
+                    HungMulti = 0.9f; HapiMulti = 0.9f;
+                    InteMulti = 0.9f; FitnMulti = 1.4f;
+                    break;
+            }
             break;
         case 'K':
-            CurrentNature = "Chaotic TBD";
-            //Same as S it would need a lot of work
+            CurrentNature = "Chaotic";
+            Chaos = true; //Pandoras box
             break;
+
+        default: Environment.Exit(0); break;
     }
 }
 
@@ -278,6 +280,40 @@ void DeletePet()
     PetSwitch();
 }
 
+void TurnStatChange(int Act, float ChaosPer)
+{
+    switch (Act)
+    { //Parsing their choice into something tangable (even if its just a line)
+        case 1:
+            Pets[CurrentPet].Hunger -= (30 * HungMulti * CriticalMulti * ChaosPer);
+            if (Pets[CurrentPet].Hunger < 0) { Pets[CurrentPet].Hunger = 0; } //Hunger option
+            break;
+        case 2:
+            Pets[CurrentPet].Happiness -= (50 * HapiMulti * CriticalMulti * ChaosPer);
+            if (Pets[CurrentPet].Happiness < 0) { Pets[CurrentPet].Happiness = 0; } //Play option
+            break;
+        case 3:
+            Pets[CurrentPet].Intelegence += (10 * InteMulti * CriticalMulti * ChaosPer); //Read option
+            break;
+        case 4:
+            Pets[CurrentPet].Fitness += (30 * FitnMulti * CriticalMulti * ChaosPer); //Exersize option
+            break;
+        case 5:
+            Console.Clear();
+            Console.WriteLine(Pets[CurrentPet].Name + " " + Pets[CurrentPet].LastName + " waves goodbye as you move onto another pet.");
+            PetSwitch();
+            break;
+        case 6:
+            Console.Clear();
+            Console.WriteLine(Pets[CurrentPet].Name + " " + Pets[CurrentPet].LastName + " waves goodbye as you move onto another pet.");
+            CreatePet();
+            break;
+        default:
+            Console.WriteLine("Please choose an apropriate number."); //Preventing errors from incorrect input
+            break;
+    }
+}
+
 // --To Add--
 // - Natures effecting stat loss/gain                               - Mosty complete
 // - More stats like intelegence, fitness and happiness             - Done
@@ -289,4 +325,5 @@ void DeletePet()
 // - Death of old age and kids that take some stats and have a      - Done
 //   good chance to copy the nature of their parents
 // - Fix the extra long hunger UI bug                               - 
-// - Add the last 2 natures                                         - 
+// - Add the last 2 natures                                         - Done
+// - Prevent the user switching specialisation after pet switch     - Done

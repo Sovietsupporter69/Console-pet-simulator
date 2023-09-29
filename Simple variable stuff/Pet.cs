@@ -10,6 +10,7 @@
     public char Nature;
     public int Generation;
     private char NewNature;
+    public int Spec;
 
     int RandNature;
     Random Rnd = new Random();
@@ -22,8 +23,9 @@
         this.Fitness = 50;
         this.Happiness = 0;
         this.Generation = 1;
+        this.Spec = 0;
 
-        switch (Rnd.Next(1, 10)) {
+        switch (Rnd.Next(1, 11)) {
             case 1:
                 this.Nature = 'L'; break; //Lethargic: less fitness gain, less hapiness loss
             case 2:
@@ -41,7 +43,8 @@
             case 8:
                 this.Nature = 'P'; break; //Playboy: changes some comments said
             case 9:
-                this.Nature = 'S'; break; //Specialised: choose a stat to get massive increases in, all others have reduced gain (including hunger)
+                this.Nature = 'S';        //Specialised: choose a stat to get massive increases in, all others have reduced gain (including hunger)
+                Special();  break;
             case 10:
                 this.Nature = 'K'; break; //Chaotic: chance to change a portion of the stat increased to another random stat.
         }
@@ -53,7 +56,7 @@
     }
     public char RandomiseNature()
     {
-        switch (Rnd.Next(1, 10))
+        switch (Rnd.Next(1, 11))
         {
             case 1:
                 NewNature = 'L'; break;
@@ -72,10 +75,29 @@
             case 8:
                 NewNature = 'P'; break;
             case 9:
-                NewNature = 'S'; break;
+                NewNature = 'S';
+                Special();  break;
             case 10:
                 NewNature = 'K'; break;
         }
         return NewNature;
+    }
+    private void Special()
+    {
+        Console.WriteLine("You have a specialised pet, please chose a specialisation: "); //Asks the user which specialisation they want
+        Console.WriteLine("1. Hunger");
+        Console.WriteLine("2. Happiness");
+        Console.WriteLine("3. Intelegence");
+        Console.WriteLine("4. Fitness");
+        Console.Write("Your choice: ");
+        while (true)
+        { //Preventing going forward without an answer
+            try
+            {
+                this.Spec = int.Parse(Console.ReadLine()); //Getting the users input
+                if (this.Spec <= 4 && this.Spec >= 0) { break; }
+            }
+            catch { }
+        }
     }
 }

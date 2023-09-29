@@ -12,3 +12,18 @@ C:\Users\hibfu\OneDrive\Desktop\Uni stuff\Programs\Simple variable stuff\Simple 
 C:\Users\hibfu\OneDrive\Desktop\Uni stuff\Programs\Simple variable stuff\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.pdb
 C:\Users\hibfu\OneDrive\Desktop\Uni stuff\Programs\Simple variable stuff\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.genruntimeconfig.cache
 C:\Users\hibfu\OneDrive\Desktop\Uni stuff\Programs\Simple variable stuff\Simple variable stuff\obj\Debug\net6.0\ref\Simple variable stuff.dll
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\bin\Debug\net6.0\Simple variable stuff.exe
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\bin\Debug\net6.0\Simple variable stuff.deps.json
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\bin\Debug\net6.0\Simple variable stuff.runtimeconfig.json
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\bin\Debug\net6.0\Simple variable stuff.dll
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\bin\Debug\net6.0\Simple variable stuff.pdb
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.csproj.AssemblyReference.cache
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.AssemblyInfoInputs.cache
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.AssemblyInfo.cs
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.csproj.CoreCompileInputs.cache
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.dll
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\refint\Simple variable stuff.dll
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.pdb
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\Simple variable stuff.genruntimeconfig.cache
+C:\Users\c3030690\Source\Repos\Console-pet-simulator\Simple variable stuff\obj\Debug\net6.0\ref\Simple variable stuff.dll
